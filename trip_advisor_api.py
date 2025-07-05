@@ -23,11 +23,12 @@ def fetch_reviews(location_id, offset):
     url = f"https://api.content.tripadvisor.com/api/v1/location/{location_id}/reviews?language=en&offset={offset}&key={TRIP_ADVISOR_API_KEY}"
     headers = {"accept": "application/json"}
     response = requests.get(url, headers=headers)
+    print(response.json())
 
     return response.json()
 
 def get_nearby_hotels(lat, lon):
-    offsets = [0]
+    offsets = [-0.01, 0.01]
     latitudes = [lat + offset for offset in offsets]
     longitudes = [lon + offset for offset in offsets]
     hotel_list = []
@@ -43,10 +44,8 @@ def get_nearby_hotels(lat, lon):
 
 def fetch_hotels(lat, lon):
     print("Making API call to TripAdvisor for nearby hotels at lat:", lat, "lon:", lon)
-    url = f"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={lat}%2C%20{lon}&category=hotels&radius=10&radiusUnit=km&language=en&key={TRIP_ADVISOR_API_KEY}"
-    print(url)
+    url = f"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={lat}%2C%20{lon}&category=hotels&radius=5&radiusUnit=km&language=en&key={TRIP_ADVISOR_API_KEY}"
     headers = {"accept": "application/json"}
     response = requests.get(url, headers=headers)
-    print(response.json())
     return response.json()
 

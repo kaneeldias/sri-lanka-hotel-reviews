@@ -35,3 +35,19 @@ def append_to_csv(row: dict, csv_path: str):
             writer.writeheader()  # Write header only if file does not exist
 
         writer.writerow(row)
+
+def get_collected_hotel_ids(csv_path: str):
+    import csv
+    from pathlib import Path
+
+    file_path = Path(csv_path)
+    if not file_path.exists():
+        return set()
+
+    collected_ids = set()
+    with file_path.open('r', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            collected_ids.add(row['location_id'])
+
+    return collected_ids
