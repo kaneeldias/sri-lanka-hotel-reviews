@@ -1,0 +1,5 @@
+feature_matrix_bow.csv
+feature_matrix_tfidf.csv
+feature_matrix_word2vec.csv
+feature_matrix_glove.csv
+word2vec.model
